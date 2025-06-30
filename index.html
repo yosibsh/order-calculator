@@ -2,7 +2,7 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>הזמנת מוצרים</title>
+  <title>טופס תשלום</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -52,7 +52,7 @@
 </head>
 <body>
 
-  <h2>טופס הזמנה</h2>
+  <h2>טופס תשלום</h2>
 
   <table>
     <thead>
@@ -75,10 +75,14 @@
   <script>
     const phoneNumber = "+972508528328";
     const products = [
-      { name: "בירה חיטה", price: 20 },
-      { name: "בלונד אייל", price: 22 },
-      { name: "IPA מרירה", price: 25 },
-      { name: "סטאוט כהה", price: 23 }
+      { name: "בירה חיטה", price: 15 },
+      { name: "בלונד אייל", price: 15 },
+      { name: "IPA מרירה", price: 15 },
+      { name: "אייל אדמוני", price: 15 }
+      { name: "מוחיטו", price: 15 }
+      { name: "לימונערק", price: 15 }
+      { name: "נקניקיות - ילדים", price: 15 }
+      { name: "נקניקיות - מבוגרים", price: 15 }
     ];
 
     const table = document.getElementById("product-table");
@@ -111,8 +115,10 @@
 
       // עדכון קישורי התשלום
       const message = encodeURIComponent(`שלום, אני מעוניין לשלם על ההזמנה בסך ₪${total}`);
-      bitLink.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
-      payboxLink.href = `https://payboxapp.page.link/?link=https://payboxapp.com/pay/${phoneNumber}?amount=${total}&apn=com.paybox&isi=1181626721&ibi=com.paybox`;
+      bitLink.href = `https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC`;
+      // bit Link.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
+      payboxLink.href = `https://link.payboxapp.com/ZpoA3XDiBq78vqsG7`;
+      // payboxLink.href = `https://payboxapp.page.link/?link=https://payboxapp.com/pay/${phoneNumber}?amount=${total}&apn=com.paybox&isi=1181626721&ibi=com.paybox`;
     }
   </script>
 
