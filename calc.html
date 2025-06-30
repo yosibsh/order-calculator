@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>הזמנת מוצרים</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      padding: 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    .pay-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pay-buttons a {
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+    }
+    .bit { background-color: #3b5998; }
+    .paybox { background-color: #00bfa5; }
+  </style>
+</head>
+<body>
+
+  <h2>טופס הזמנה</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>מוצר</th>
+        <th>מחיר ליח'</th>
+        <th>כמות</th>
+      </tr>
+    </thead>
+    <tbody id="product-table"></tbody>
+  </table>
+
+  <div class="total">סכום כולל: <span id="total">₪0</span></div>
+
+  <div class="pay-buttons">
+    <a id="bit-link" class="bit" href="#" target="_blank">לתשלום ב-Bit</a>
+    <a id="paybox-link" class="paybox" href="#" target="_blank">לתשלום ב-PayBox</a>
+  </div>
+
+  <script>
+    const phoneNumber = "+972508528328";
+    const products = [
+      { name: "בירה חיטה", price: 20 },
+      { name: "בלונד אייל", price: 22 },
+      { name: "IPA מרירה", price: 25 },
+      { name: "סטאוט כהה", price: 23 }
+    ];
+
+    const table = document.getElementById("product-table");
+    const totalDisplay = document.getElementById("total");
+    const bitLink = document.getElementById("bit-link");
+    const payboxLink = document.getElementById("paybox-link");
+
+    products.forEach((product, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${product.name}</td>
+        <td>₪${product.price}</td>
+        <td><input type="number" min="0" value="0" data-index="${index}" /></td>
+      `;
+      table.appendChild(row);
+    });
+
+    document.querySelectorAll("input[type='number']").forEach(input => {
+      input.addEventListener("input", updateTotal);
+    });
+
+    function updateTotal() {
+      let total = 0;
+      document.querySelectorAll("input[type='number']").forEach(input => {
+        const index = input.dataset.index;
+        const quantity = parseInt(input.value) || 0;
+        total += products[index].price * quantity;
+      });
+      totalDisplay.textContent = `₪${total}`;
+
+      // עדכון קישורי התשלום
+      const message = encodeURIComponent(`שלום, אני מעוניין לשלם על ההזמנה בסך ₪${total}`);
+      bitLink.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
+      payboxLink.href = `https://payboxapp.page.link/?link=https://payboxapp.com/pay/${phoneNumber}?amount=${total}&apn=com.paybox&isi=1181626721&ibi=com.paybox`;
+    }
+  </script>
+
+</body>
+</html>
+
