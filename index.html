@@ -68,8 +68,8 @@
   <div class="total">סכום כולל: <span id="total">₪0</span></div>
 
   <div class="pay-buttons">
-    <a id="bit-link" class="bit" href="#" target="_blank">לתשלום ב-Bit</a>
-    <a id="paybox-link" class="paybox" href="#" target="_blank">לתשלום ב-PayBox</a>
+    <a id="bit-link" class="bit" href="https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC" target="_blank">לתשלום ב-Bit</a>
+    <a id="paybox-link" class="paybox" href="https://link.payboxapp.com/ZpoA3XDiBq78vqsG7" target="_blank">לתשלום ב-PayBox</a>
   </div>
 
   <script>
@@ -114,10 +114,10 @@
       totalDisplay.textContent = `₪${total}`;
 
       // עדכון קישורי התשלום
-      const message = encodeURIComponent(`שלום, אני מעוניין לשלם על ההזמנה בסך ₪${total}`);
-      bitLink.href = `https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC`;
+      // const message = encodeURIComponent(`שלום, אני מעוניין לשלם על ההזמנה בסך ₪${total}`);
+      // bitLink.href = `https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC`;
       // bit Link.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
-      payboxLink.href = `https://link.payboxapp.com/ZpoA3XDiBq78vqsG7`;
+      // payboxLink.href = `https://link.payboxapp.com/ZpoA3XDiBq78vqsG7`;
       // payboxLink.href = `https://payboxapp.page.link/?link=https://payboxapp.com/pay/${phoneNumber}?amount=${total}&apn=com.paybox&isi=1181626721&ibi=com.paybox`;
     }
   </script>
