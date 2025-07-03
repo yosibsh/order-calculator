@@ -53,6 +53,25 @@
       display: block;
       margin: 0 auto 20px;
     }
+    .copy-btn {
+      background: linear-gradient(to right, #4CAF50, #45A049);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(to right, #66bb6a, #43a047);
+      transform: scale(1.05);
+    }
+
   </style>
 </head>
 <body>
@@ -72,6 +91,12 @@
   </table>
 
   <div class="total">סכום כולל: <span id="total">₪0</span></div>
+  <div style="text-align: center; margin: 30px 0;">
+    <span style="font-size: 18px;">טלפון לתשלום: </span>
+   <span id="phone-number" style="font-weight: bold; direction: ltr;">050-8528328</span>
+   <button onclick="copyPhone()" class="copy-btn">📋העתק מספר</button>
+  <div id="copy-msg" style="color: green; font-size: 14px; display: none;">המספר הועתק</div>
+</div>
 
   <div class="pay-buttons">
     <a id="bit-link" class="bit" href="https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC" target="_blank">לתשלום ב-Bit</a>
@@ -79,6 +104,15 @@
   </div>
 
   <script>
+    function copyPhone() {
+
+      navigator.clipboard.writeText("+972508528328").then(() => {
+        const msg = document.getElementById("copy-msg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 2000);
+      });
+    }
+
     const phoneNumber = "+972508528328";
     const products = [
       { name: "בירה חיטה", price: 15 },
@@ -122,13 +156,14 @@
       // עדכון קישורי התשלום
       const message = encodeURIComponent(`שלום, אני מעוניין לשלם על ההזמנה בסך ₪${total}`);
       bitLink.href = `https://www.bitpay.co.il/app/me/C983807C-9ADC-CED9-C42E-32281FC513D758BC?amount=${total}&message=${message}`;
-      // bit Link.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
+      // bitLink.href = `https://bitpay.co.il/app/pay/${phoneNumber}?amount=${total}&message=${message}`;
       // payboxLink.href = `https://link.payboxapp.com/ZpoA3XDiBq78vqsG7`;
       // payboxLink.href = `https://payboxapp.page.link/?link=https://payboxapp.com/pay/${phoneNumber}?amount=${total}&apn=com.paybox&isi=1181626721&ibi=com.paybox`;
+      // added to instegram link: ?igsh=eXYwemJnNjYzemMw
     }
   </script>
 <div style="text-align: center; margin-top: 30px;">
-  <a href="https://www.instagram.com/benshi.beers?igsh=eXYwemJnNjYzemMw" target="_blank" style="text-decoration: none; color: inherit;">
+  <a href="https://www.instagram.com/benshi.beers" target="_blank" style="text-decoration: none; color: inherit;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
          alt="אינסטגרם" 
          style="width: 32px; vertical-align: middle; margin-right: 8px;" />
